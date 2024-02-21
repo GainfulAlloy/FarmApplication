@@ -1,3 +1,6 @@
+using FarmApplication.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace FarmApplication
 {
     public class Program
@@ -8,6 +11,9 @@ namespace FarmApplication
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+            builder.Services.AddDbContext<ApplicationDBContext>(options=>options.UseSqlServer(
+                builder.Configuration.GetConnectionString("DefaultConnection")
+                ));
 
             var app = builder.Build();
 

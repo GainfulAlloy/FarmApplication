@@ -1,0 +1,20 @@
+﻿@page
+@model FarmApplication.Pages.Fields.AddFieldModel
+
+<form method="post">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary pl-3">Create Field</h2>
+			<hr />
+		</div>
+		<div class="mb-3">
+			<label asp-for="field.FieldName"></label>
+			<input asp-for="field.FieldName" class="form-control" />
+		</div>
+		<div class="mb-3">
+			<label asp-for="field.FieldSize"></label>
+			<input asp-for="field.FieldSize" class="form-control" />
+		</div>
+		<button type="submit" class="btn btn-primary" style="width:150px;">Create Field</button>
+	</div>
+</form>
