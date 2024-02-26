@@ -1,5 +1,8 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
+
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,8 +10,60 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FarmApplication.styles.css" asp-append-version="true" />
+    <!-- there is a list of icons contained in this style sheet on w3schools -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
+
+
 <body>
+   <header>
+        <nav class="navbar navbar-light bg-white border-bottom box-shadow mb-3 flex-column">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">FarmApplication</a>
+                <!-- note - the navbar toggle option does not obscure page content, it will add a scroll if needs be-->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">
+                                <span class="material-icons">home</span> &ensp;My Farm
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="Fields/Index">
+                                <span class="material-icons">trending_up</span> &ensp; Fields
+                            </a>
+                        </li>
+                        <!-- note there isnt a calendar or settings page currently -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Calendar">
+                                <span class="material-icons">insert_invitation</span> &ensp;Calendar
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Settings">
+                                <span class="material-icons">build</span> &ensp;Settings
+                            </a>
+                        </li>
+                        <!-- Will prob change this to just link to the log in page -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/LogIn">
+                                <span class="material-icons">exit_to_app</span> &ensp;Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 
+        
+    old nav bar code if you want a more simple look or to try make it vertical
+    
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -25,11 +80,24 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="Fields/Index">Fields</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Calender">Calender</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Settings">Settings</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+    
+    
+    -->
+
+
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
