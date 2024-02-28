@@ -29,6 +29,7 @@ namespace FarmApplication.Pages.Fields
             {
                 await _db.Fields.AddAsync(field);
                 await _db.SaveChangesAsync();
+                TempData["success"] = "Field Created";
                 return RedirectToPage("Index");
 
             }

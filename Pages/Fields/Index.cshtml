@@ -15,6 +15,15 @@
 
 	<br /><br />
 
+	<!-- this will show a set notification for when one of the three actions is performed on the database. Notification can be found at the end of the .cs files -->
+	@if (TempData["success"] != null)
+	{
+		
+		<p class="text-success">@TempData["success"]</p>
+
+	}
+	
+
 	<table class="table table-bordered table-striped" style="width:100%">
 		<thead>
 			<tr>
