@@ -6,7 +6,7 @@
 		<div class="col-6">
 			<h2 class="text-primary">Field List</h2>
 		</div>
-		<div class="col-6">
+		<div class="col-6 text-end">
 			<a asp-page="AddField" class="btn btn-primary">
 				Create new field
 			</a>
@@ -32,6 +32,13 @@
 				<tr>
 					<td width="50%">@obj.FieldName</td>
 					<td width="30%">@obj.FieldSize</td>
+					<td>
+						<div class="w-75 btn-group" role="group">
+						<a asp-page="EditField" asp-route-id="@obj.FieldID" class="btn btn-primary mx-2">Edit
+						</a>
+						<a asp-page="DeleteField" asp-route-id="@obj.FieldID" class="btn btn-danger mx-2">Delete</a>
+						</div>
+					</td>
 				</tr>
 			}
 		</tbody>

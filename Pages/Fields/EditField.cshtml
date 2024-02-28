@@ -1,10 +1,11 @@
 ﻿@page
-@model FarmApplication.Pages.Fields.AddFieldModel
+@model FarmApplication.Pages.Fields.EditFieldModel
 
 <form method="post">
+	<input hidden asp-for="field.FieldID"/>
 	<div class="border p-3 mt-4">
 		<div class="row pb-2">
-			<h2 class="text-primary pl-3">Create Field</h2>
+			<h2 class="text-primary pl-3">Edit Field</h2>
 			<hr />
 		</div>
 		<!-- this line will display errors for custom errors in the .cs file
@@ -22,7 +23,8 @@
 			<input asp-for="field.FieldSize" class="form-control" />
 			<span asp-validation-for="field.FieldSize" class="text-danger"></span>
 		</div>
-		<button type="submit" class="btn btn-primary" style="width:150px;">Create Field</button>
+		<button type="submit" class="btn btn-primary" style="width:150px;">Update Field</button>
+		<!-- ../Index will return you to the main homepage index instead -->
 		<a asp-page="Index" class="btn btn-primary" style="width:150px;">Back To List</a>
 	</div>
 </form>

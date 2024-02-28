@@ -7,10 +7,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - FarmApplication</title>
+    <!-- you can download a theme from bootswatch to a file and set the location below to that file to change theme of the applciation -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FarmApplication.styles.css" asp-append-version="true" />
-    <!-- there is a list of icons contained in this style sheet on w3schools -->
+    <!-- there is a list of icons contained in this style sheet on https://www.w3schools.com/icons/icons_reference.asp 
+        they seem to display a few pnts higher on the line then the text for each page
+    -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
@@ -27,11 +30,23 @@
                 </button>
                 <div class="navbar-collapse collapse">
                     <ul class="navbar-nav">
+                        <!-- could maybe make this an overview page instead and have the home page to be something else -->
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">
                                 <span class="material-icons">home</span> &ensp;My Farm
                             </a>
                         </li>
+                        <!-- this page should allow the user to have full control over adding or editing the amount of resources avaliable
+                            here they should be able to select how many workers they have, robots, stock, etc... 
+                            using the data entered they should be allowed to allocate an amount of resources to each field when creating a task for the field
+                            I want it so that once a task has completed that equipment/ employee resources are returned but stock isn't
+                        -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="">
+                                <span class="material-icons">equalizer</span> &ensp;Manage Resources
+                            </a>
+                        </li>
+                        <!-- links to the Fields folder Index page. Allows for the creation of fields by adding a name and size.-->
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="Fields/Index">
                                 <span class="material-icons">trending_up</span> &ensp; Fields
@@ -48,7 +63,7 @@
                                 <span class="material-icons">build</span> &ensp;Settings
                             </a>
                         </li>
-                        <!-- Will prob change this to just link to the log in page -->
+                        <!-- Will prob change this to just link to the log in page, but actually need a method to log them out -->
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/LogIn">
                                 <span class="material-icons">exit_to_app</span> &ensp;Logout

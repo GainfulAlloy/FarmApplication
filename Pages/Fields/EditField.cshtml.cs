@@ -6,17 +6,18 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace FarmApplication.Pages.Fields
 {
-    public class AddFieldModel : PageModel
+    public class EditFieldModel : PageModel
     {
         private readonly ApplicationDBContext _db;
         public Field field {  get; set; } 
 
-        public AddFieldModel(ApplicationDBContext db)
+        public EditFieldModel(ApplicationDBContext db)
         {
             _db = db;
         }
-        public void OnGet()
+        public void OnGet(int id)
         {
+            field = _db.Fields.Find(id);
         }
         public async Task<IActionResult> OnPost(Field field)
         {
@@ -27,7 +28,7 @@ namespace FarmApplication.Pages.Fields
             }
             if (ModelState.IsValid)
             {
-                await _db.Fields.AddAsync(field);
+                _db.Fields.Update(field);
                 await _db.SaveChangesAsync();
                 return RedirectToPage("Index");
 
