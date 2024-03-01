@@ -22,7 +22,8 @@ namespace FarmApplication.Pages.Fields
         }
         public async Task<IActionResult> OnPost(int id)
         {
-            // problem i think its just trying to delete an id rather then an object 		
+            // problem i think its just trying to delete an id rather then an object
+            // fixed it		
             var FieldFromDB = _db.Fields.Find(id);
 
             if (FieldFromDB != null)

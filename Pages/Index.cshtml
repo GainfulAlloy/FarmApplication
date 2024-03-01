@@ -3,8 +3,23 @@
 @{
     ViewData["Title"] = "Home page";
 }
+@using Microsoft.AspNetCore.Identity
+@using FarmApplication.Areas.Identity.Data
 
+@inject SignInManager<FarmApplicationDBUser> SignInManager
+@inject UserManager<FarmApplicationDBUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
 <div class="text-center">
     <h1 class="display-4">Welcome to the farm application!</h1>
     <p>I think we should make this like a clear overview page to view resources, summary of tasks, farm information (such as a map), etc...</p>
-</div>
+    <p>Check Pages/Index/Index.cshtml to see how to grab the users userID</p>
+    <p>User ID : @ViewData["UserID"]</p>
+    </div>
+}
+// if the user is logged out redirect them to the login screen on refresh
+else
+{
+    <meta http-equiv="Refresh" content="0; url= /Identity/Account/Login" />
+}

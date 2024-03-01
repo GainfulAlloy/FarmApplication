@@ -8,6 +8,7 @@ namespace FarmApplication.Model
         public int FieldID { get; set; }
         [Required]
         public string FieldName { get; set; }
+
         // this will change the display name of this property everywhere in the app unless overriden 
         [Display(Name = "Size (Acres)")]
         // largest farm in the uk is 25,000

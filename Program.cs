@@ -1,5 +1,8 @@
 using FarmApplication.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using FarmApplication.Areas.Identity.Data;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace FarmApplication
 {
@@ -14,6 +17,14 @@ namespace FarmApplication
             builder.Services.AddDbContext<ApplicationDBContext>(options=>options.UseSqlServer(
                 builder.Configuration.GetConnectionString("DefaultConnection")
                 ));
+
+            // adding the login databse
+            // need to change the connection string and create an actual connection
+            builder.Services.AddDbContext<FarmApplicationDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("FarmApplicationDBContextConnection")));
+            builder.Services.AddDefaultIdentity<FarmApplicationDBUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddEntityFrameworkStores<FarmApplicationDBContext>();
+
+            
 
             var app = builder.Build();
 
@@ -32,9 +43,16 @@ namespace FarmApplication
 
             app.UseAuthorization();
 
+
+
             app.MapRazorPages();
 
             app.Run();
+        }
+
+        private static void connectionString(SqlServerDbContextOptionsBuilder builder)
+        {
+            throw new NotImplementedException();
         }
     }
 }
