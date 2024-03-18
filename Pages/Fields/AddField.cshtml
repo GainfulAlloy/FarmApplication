@@ -1,6 +1,15 @@
 ﻿@page
 @model FarmApplication.Pages.Fields.AddFieldModel
 
+@using Microsoft.AspNetCore.Identity
+@using FarmApplication.Areas.Identity.Data
+@inject UserManager<FarmApplicationDBUser> UserManager
+
+@{
+	var user = await UserManager.GetUserAsync(User);
+	var userId = user?.Id; // Retrieve UserID of the authenticated user
+}
+
 <form method="post">
 	<div class="border p-3 mt-4">
 		<div class="row pb-2">
@@ -8,7 +17,7 @@
 			<hr />
 		</div>
 		<!-- this line will display errors for custom errors in the .cs file
-			you can set ModelOnly to All
+		you can set ModelOnly to All
 		<div asp-validation-summary="ModelOnly"></div>
 		-->
 		<div class="mb-3">
@@ -21,7 +30,16 @@
 			<label asp-for="field.FieldSize">Size of Field (Acres)</label>
 			<input asp-for="field.FieldSize" class="form-control" />
 			<span asp-validation-for="field.FieldSize" class="text-danger"></span>
+			
 		</div>
+		<!-- for some reason userID entering a stirng into userID doesnt seem to want to make it valid -->
+		<!--<div class="mb-3">
+			<label asp-for="field.UserID">Size of Field (Acres)</label>
+			<input asp-for="field.UserID" class="form-control" />
+			<span asp-validation-for="field.UserID" class="text-danger"></span>
+
+		</div>-->
+		<input type="hidden" id="field.UserID"name="userId" value="@userId" /><!-- Include UserID in the form -->
 		<button type="submit" class="btn btn-primary" style="width:150px;">Create Field</button>
 		<a asp-page="Index" class="btn btn-primary" style="width:150px;">Back To List</a>
 	</div>
@@ -33,5 +51,6 @@
 @section scripts{
 	@{
 		<partial name="_ValidationScriptsPartial"/>
+		
 	}
 }

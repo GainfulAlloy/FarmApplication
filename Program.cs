@@ -15,10 +15,10 @@ namespace FarmApplication
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddDbContext<ApplicationDBContext>(options=>options.UseSqlServer(
-                builder.Configuration.GetConnectionString("DefaultConnection")
+                builder.Configuration.GetConnectionString("FarmApplicationDBContextConnection")
                 ));
 
-            // adding the login databse
+            // adding the login database
             // need to change the connection string and create an actual connection
             builder.Services.AddDbContext<FarmApplicationDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("FarmApplicationDBContextConnection")));
             builder.Services.AddDefaultIdentity<FarmApplicationDBUser>(options => options.SignIn.RequireConfirmedAccount = false)

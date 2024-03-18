@@ -17,9 +17,11 @@ Pages should be self explanitory.
 The Areas Folder is used for the login system, contains the log in pages and db files, should be able to ignore it for the most part
 If adding new file to Pages, reference it in the imports file
 
+To add mulitple items to a database, include the context for them all in one DBContext file.
+
 Migrating data to the database:
 
-Tools -> NuGet Packet manager -> package manager console. then add-migration "migration name" -dbcontext (change that for the name of the context to migrate)
+Tools -> NuGet Packet manager -> package manager console. then add-migration "migration name" -context "dbcontext" (change that for the name of the context to migrate)
 type update-database -dbcontext in Packet manger console, the DB will now be viewable in View -> SQL Server objecct explorer in the Databases folder.
 
 tutorial I used to set up the login system - https://www.youtube.com/watch?v=wzaoQiS_9dI
@@ -29,3 +31,6 @@ What I think we need to do:
 - have a page where the user can create tasks on thier farm which will allow them to select a field and some other options
 - create a calender to view the tasks they have created
 - not sure what to do after that (maybe improve the add field feature, like draw a box over a google map image).
+
+
+why this is in a different branch - this one has the code to link the userid to the form being submitted, however a lot of bloat was kinda added trying to figure it out.
