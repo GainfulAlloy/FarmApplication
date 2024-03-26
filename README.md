@@ -29,3 +29,10 @@ What I think we need to do:
 - have a page where the user can create tasks on thier farm which will allow them to select a field and some other options
 - create a calender to view the tasks they have created
 - not sure what to do after that (maybe improve the add field feature, like draw a box over a google map image).
+
+- todo today: 
+- merge with other branch, need to change in program.cs the connection string so that all tables are in same db.
+- make sure I can get the fk feature working 
+- add the new tables to record data and make sure they work, this will go on the manage resources page
+- try to add a create task button - will put this on the 
+- 
