@@ -10,7 +10,11 @@ namespace FarmApplication.Pages
         private readonly ILogger<IndexModel> _logger;
         private readonly UserManager<FarmApplicationDBUser> _userManager;
 
-        [ActivatorUtilitiesConstructor]
+		[BindProperty]
+		public DateTime CurrentTime { get; set; }
+
+
+		[ActivatorUtilitiesConstructor]
         public IndexModel(ILogger<IndexModel> logger, UserManager<FarmApplicationDBUser> userManager)
         {
             _logger = logger;
@@ -21,6 +25,7 @@ namespace FarmApplication.Pages
         public void OnGet()
         {
             ViewData["UserID"] = _userManager.GetUserId(this.User);
-        }
+			CurrentTime = DateTime.Now;
+		}
     }
 }

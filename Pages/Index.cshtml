@@ -16,8 +16,41 @@
     <p>I think we should make this like a clear overview page to view resources, summary of tasks, farm information (such as a map), etc...</p>
     <p>Check Pages/Index/Index.cshtml to see how to grab the users userID</p>
     <p>User ID : @ViewData["UserID"]</p>
+	<div id="clock"></div>
     </div>
+
+    <!-- this below is an implementation of a live text clock -->
+
+    @section Scripts {
+    <script>
+        function updateClock() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+
+            // Pad single digit values with leading zeros
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            var timeString = hours + ':' + minutes + ':' + seconds;
+            document.getElementById('clock').innerHTML = timeString;
+        }
+
+        // Update the clock every second
+        setInterval(updateClock, 1000);
+
+        // Initial call to display the clock
+        updateClock();
+    </script>
+    }
+
+
 }
+
+
+
 // if the user is logged out redirect them to the login screen on refresh
 else
 {
