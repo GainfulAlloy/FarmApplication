@@ -1,0 +1,44 @@
+﻿@page
+@model FarmApplication.Pages.Resources.AddWorkersModel
+
+
+<form method="post">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary pl-3">Add New Resource</h2>
+			<hr />
+		</div>
+		<!-- this line will display errors for custom errors in the .cs file
+			you can set ModelOnly to All
+		<div asp-validation-summary="ModelOnly"></div>
+		-->
+		<div asp-validation-summary="All"></div>
+		<div class="mb-3">
+			<label asp-for="WorkersOnFarm.WorkerName">Employee Name</label>
+			<input asp-for="WorkersOnFarm.WorkerName" class="form-control" />
+			<!-- you can type in a custom error between class="text-danger"> Custom error here </span> however it will overpower other error displays -->
+			<span asp-validation-for="WorkersOnFarm.WorkerName" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="WorkersOnFarm.WorkerSalary">Salary </label>
+			<input asp-for="WorkersOnFarm.WorkerSalary" class="form-control" />
+			<span asp-validation-for="WorkersOnFarm.WorkerSalary" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="WorkersOnFarm.EmployedUntil">Employed Until </label>
+			<input asp-for="WorkersOnFarm.EmployedUntil" class="form-control" />
+			<span asp-validation-for="WorkersOnFarm.EmployedUntil" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-primary" style="width:150px;">Add Employee</button>
+		<a asp-page="ResourceIndex" class="btn btn-primary" style="width:150px;">Back To List</a>
+	</div>
+</form>
+
+<!-- this section causes errors caught in this page to be client side validated instead of server (page wont refresh).
+	note - the custom validation in the .cs file will still be server validated.
+-->
+@section scripts {
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

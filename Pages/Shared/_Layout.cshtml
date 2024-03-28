@@ -48,14 +48,18 @@
                             using the data entered they should be allowed to allocate an amount of resources to each field when creating a task for the field
                             I want it so that once a task has completed that equipment/ employee resources are returned but stock isn't
                             -->
+                            <!-- Bug notice: you cant access resources or fields while you have the other page open,
+                                 i think it checks the current directory its in for the folder and cant find it.
+                                 Fix - use href instead
+                            -->
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="">
+                                <a class="nav-link text-dark" a href="~/Resources/ResourceIndex">
                                     <span class="material-icons">equalizer</span> &ensp;Manage Resources
                                 </a>
                             </li>
                             <!-- links to the Fields folder Index page. Allows for the creation of fields by adding a name and size.-->
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="Fields/Index">
+                                <a class="nav-link text-dark" a href="~/Fields/Index">
                                     <span class="material-icons">trending_up</span> &ensp; Fields
                                 </a>
                             </li>

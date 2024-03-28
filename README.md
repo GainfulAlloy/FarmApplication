@@ -18,6 +18,7 @@ The Areas Folder is used for the login system, contains the log in pages and db 
 If adding new file to Pages, reference it in the imports file
 
 Migrating data to the database:
+(i think you can safely delete the migration file after running the update command)
 
 Tools -> NuGet Packet manager -> package manager console. then add-migration "migration name" -dbcontext (change that for the name of the context to migrate)
 type update-database -dbcontext in Packet manger console, the DB will now be viewable in View -> SQL Server objecct explorer in the Databases folder.
