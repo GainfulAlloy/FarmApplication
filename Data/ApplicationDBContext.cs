@@ -17,5 +17,6 @@ namespace FarmApplication.Data
 		public DbSet<FarmResources> Resources { get; set; }
 		public DbSet<Equipment> Equipment { get; set; }
 		public DbSet<Workers> Workers { get; set; }
+        public DbSet<FarmTasks> Tasks { get; set; }
 	}
 }
