@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FarmApplication.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240329141708_addedTasks")]
-    partial class addedTasks
+    [Migration("20240401145426_plsworkkkkkkkk")]
+    partial class plsworkkkkkkkk
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -133,6 +133,15 @@ namespace FarmApplication.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TaskID"));
 
+                    b.Property<int>("EquipmentValuesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FieldValuesFieldID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ResourcesValuesResourceId")
+                        .HasColumnType("int");
+
                     b.Property<string>("TaskEquipment")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -149,7 +158,18 @@ namespace FarmApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("WorkersValuesWorkerID")
+                        .HasColumnType("int");
+
                     b.HasKey("TaskID");
+
+                    b.HasIndex("EquipmentValuesId");
+
+                    b.HasIndex("FieldValuesFieldID");
+
+                    b.HasIndex("ResourcesValuesResourceId");
+
+                    b.HasIndex("WorkersValuesWorkerID");
 
                     b.ToTable("Tasks");
                 });
@@ -201,6 +221,41 @@ namespace FarmApplication.Migrations
                     b.HasKey("WorkerID");
 
                     b.ToTable("Workers");
+                });
+
+            modelBuilder.Entity("FarmApplication.Model.FarmTasks", b =>
+                {
+                    b.HasOne("FarmApplication.Model.Equipment", "EquipmentValues")
+                        .WithMany()
+                        .HasForeignKey("EquipmentValuesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FarmApplication.Model.Field", "FieldValues")
+                        .WithMany()
+                        .HasForeignKey("FieldValuesFieldID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FarmApplication.Model.FarmResources", "ResourcesValues")
+                        .WithMany()
+                        .HasForeignKey("ResourcesValuesResourceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FarmApplication.Model.Workers", "WorkersValues")
+                        .WithMany()
+                        .HasForeignKey("WorkersValuesWorkerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EquipmentValues");
+
+                    b.Navigation("FieldValues");
+
+                    b.Navigation("ResourcesValues");
+
+                    b.Navigation("WorkersValues");
                 });
 
             modelBuilder.Entity("FarmApplication.Model.Field", b =>
