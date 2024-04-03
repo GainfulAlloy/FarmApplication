@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FarmApplication.Areas.Identity.Data;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FarmApplication.Model
 {
@@ -15,6 +17,12 @@ namespace FarmApplication.Model
 		[Required]
 		// the user can list how many of this object they have, then the count can be decreased when the item is in use
 		public int EquipmentCount { get; set; }
+
+
+		public string UserID { get; set; }
+		[ForeignKey("UserID")]
+		public virtual FarmApplicationDBUser AspNetUsers { get; set; }
+
 
 		// create a link between another table
 

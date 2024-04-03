@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FarmApplication.Areas.Identity.Data;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FarmApplication.Model
 {
@@ -14,5 +16,11 @@ namespace FarmApplication.Model
 
 		// remove the worker from the table if it hits this date
 		public DateTime EmployedUntil { get; set; }
+
+		public string UserID { get; set; }
+		[ForeignKey("UserID")]
+		public virtual FarmApplicationDBUser AspNetUsers { get; set; }
+
+
 	}
 }

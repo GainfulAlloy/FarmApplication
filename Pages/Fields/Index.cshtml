@@ -1,6 +1,8 @@
 ﻿@page
 @model FarmApplication.Pages.Fields.IndexModel
 
+@using System.Security.Claims
+
 <div class="container p-3">
 	<div class="row pt-4">
 		<div class="col-6">
@@ -23,6 +25,9 @@
 
 	}
 	
+	@{
+		var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Retrieve current user's ID
+	}
 
 	<table class="table table-bordered table-striped" style="width:100%">
 		<thead>
@@ -36,7 +41,8 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach(var obj in Model.Fields)
+			@foreach (var obj in Model.Fields.Where(f => f.UserID == currentUserId))
+
 			{
 				<tr>
 					<td width="50%">@obj.FieldName</td>

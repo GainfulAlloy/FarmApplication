@@ -1,5 +1,7 @@
+using FarmApplication.Areas.Identity.Data;
 using FarmApplication.Data;
 using FarmApplication.Model;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -8,10 +10,13 @@ namespace FarmApplication.Pages.Resources
     public class AddEquipmentModel : PageModel
     {
 		private readonly ApplicationDBContext _db;
+		private readonly UserManager<FarmApplicationDBUser> _userManager;
 
-		public AddEquipmentModel(ApplicationDBContext db)
+		[ActivatorUtilitiesConstructor]
+		public AddEquipmentModel(ApplicationDBContext db, UserManager<FarmApplicationDBUser> userManager)
 		{
 			_db = db;
+			this._userManager = userManager;
 		}
 
 
@@ -31,16 +36,21 @@ namespace FarmApplication.Pages.Resources
 				ModelState.AddModelError("equipment.EquipmentName", "Name cant be the same as the size");
 			}
 
-			if (ModelState.IsValid)
-			{
-				_db.Equipment.Add(equipment);
-				await _db.SaveChangesAsync();
-				TempData["success"] = "Item Added";
-				return RedirectToPage("ResourceIndex");
+			var currentUser = await _userManager.GetUserAsync(User);
+			equipment.UserID = currentUser.Id;
+			_db.Equipment.Add(equipment);
+			await _db.SaveChangesAsync();
+			TempData["success"] = "Item Added";
+			return RedirectToPage("ResourceIndex");
 
-			}
 
-			return Page();
+			//if (ModelState.IsValid)
+			//{
+				
+
+			//}
+
+			//return Page();
 		}
 	}
 }

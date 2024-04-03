@@ -36,4 +36,34 @@ What I think we need to do:
 - make sure I can get the fk feature working 
 - add the new tables to record data and make sure they work, this will go on the manage resources page
 - try to add a create task button - will put this on the 
-- 
+
+
+- New Todo list:
+- update tables so that they have a foregin key to aspnetusers so that i can use a where clause to try and only show data related to their account
+- Add a task time start and end, i would like to have a calendar page to display all active/ upcoming tasks. Remove data as time passes.
+- remove quantities of resources if used in a task.
+
+I think that in order to add the user data to the tables, I should grab the user id as the table column then use the feature in calendar.cshtml to get the id
+
+!!!! Notice - the foreign key for the fields table works. In Fields/Index.cshtml is code on how to queery based on the usersID:
+add @using System.Security.Claims
+@{
+		var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Retrieve current user's ID
+}
+Then modify the foreach:
+@foreach(var obj in Model.Fields.Where(f => f.UserID == currentUserId))
+
+------------------------------------------------------------------------------
+Read this for the Account Linked Data Branch:
+(if you have already added the tables (Field, Resource, equipment, workers or tasks) to your sql server delete them. 
+The current migration file should add all the data back if done correctly. If not delete the migration file and create a new one.
+
+I Need to create all the tables at the same time/ in a specific order for it to work, once the id collumn is added to all the tables, i then have to create them.
+
+
+!!! IMPORTANT - upon using update-database you may have a table called FarmDatabaseUsers (or something simmilar). Delete the table
+It will break the foreign key saving for user data.
+
+This error can occur when using update-database, to fix find the referenced line in the migration file and change "Cascade" to "Delete".
+Introducing FOREIGN KEY constraint 'FK_Tasks_FarmApplicationDBUser_UserID' on table 'Tasks' may cause cycles or multiple cascade paths. Specify ON DELETE NO ACTION or ON UPDATE NO ACTION, or modify other FOREIGN KEY constraints.
+

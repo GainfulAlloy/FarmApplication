@@ -1,6 +1,7 @@
 ﻿@page
 @model FarmApplication.Pages.Resources.ResourceIndexModel
 
+@using System.Security.Claims
 
 <!-- plan for the Resources page:
 	Create multiple databasess, maybe 3 - Crop, Equipment, Workers
@@ -15,6 +16,9 @@
 
 
 -->
+@{
+	var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Retrieve current user's ID
+}
 
 <!-- ill make 3 tables -->
 
@@ -53,7 +57,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach (var obj in Model.FarmingResources)
+			@foreach (var obj in Model.FarmingResources.Where(f => f.UserID == currentUserId))
 			{
 				<tr>
 					<td width="50%">@obj.ResourceName</td>
@@ -114,7 +118,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach (var obj in Model.Equipments)
+			@foreach (var obj in Model.Equipments.Where(f => f.UserID == currentUserId))
 			{
 				<tr>
 					<td width="50%">@obj.EquipmentName</td>
@@ -176,7 +180,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach (var obj in Model.WorkersOnFarm)
+			@foreach (var obj in Model.WorkersOnFarm.Where(f => f.UserID == currentUserId))
 			{
 				<tr>
 					<td width="25%">@obj.WorkerName</td>

@@ -1,12 +1,17 @@
 ﻿@page
 @model FarmApplication.Pages.CalendarModel
 
+@using System.Security.Claims
+
 <div class="text-center">
 	<h1 class="accordion-body">Calendar page</h1>
 	<p> This page should show a timetable like thing with a clock that shows when activities in different fields are happening</p>
 	<p> Sort of like the timetable on blackboard, should also display the resources being used </p>
 </div>
 
+@{
+	var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Retrieve current user's ID
+}
 
 <div class="container p-3">
 	<div class="row pt-4">		
@@ -37,7 +42,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach (var obj in Model.FarmTask)
+			@foreach (var obj in Model.FarmTask.Where(f => f.UserID == currentUserId))
 			{
 				<tr>
 					<td width="20%">@obj.FieldValues.FieldName</td>

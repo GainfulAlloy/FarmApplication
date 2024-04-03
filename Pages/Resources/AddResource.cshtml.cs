@@ -11,10 +11,12 @@ namespace FarmApplication.Pages.Resources
     {
 
 		private readonly ApplicationDBContext _db;
-
-		public AddResourceModel(ApplicationDBContext db)
+		private readonly UserManager<FarmApplicationDBUser> _userManager;
+		[ActivatorUtilitiesConstructor]
+		public AddResourceModel(ApplicationDBContext db, UserManager<FarmApplicationDBUser> userManager)
 		{
 			_db = db;
+			this._userManager = userManager;
 		}
 
 
@@ -34,16 +36,20 @@ namespace FarmApplication.Pages.Resources
 					ModelState.AddModelError("Resources.ResourceName", "Name cant be the same as the size");
 				}
 
-				if (ModelState.IsValid)
-				{
-					_db.Resources.Add(Resources);
-					await _db.SaveChangesAsync();
-					TempData["success"] = "Resource Added";
-					return RedirectToPage("ResourceIndex");
+			var currentUser = await _userManager.GetUserAsync(User);
+			Resources.UserID = currentUser.Id;
+			_db.Resources.Add(Resources);
+			await _db.SaveChangesAsync();
+			TempData["success"] = "Resource Added";
+			return RedirectToPage("ResourceIndex");
 
-				}	
+			//if (ModelState.IsValid)
+				//{
+					
 
-			return Page();
+				//}	
+
+			//return Page();
 		}
 
 

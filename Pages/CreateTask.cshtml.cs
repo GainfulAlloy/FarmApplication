@@ -1,5 +1,7 @@
+using FarmApplication.Areas.Identity.Data;
 using FarmApplication.Data;
 using FarmApplication.Model;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -10,12 +12,14 @@ namespace FarmApplication.Pages
     {
 
 		private readonly ApplicationDBContext _db;
+		private readonly UserManager<FarmApplicationDBUser> _userManager;
 
-        [ActivatorUtilitiesConstructor]
-        public CreateTaskModel(ApplicationDBContext db)
+		[ActivatorUtilitiesConstructor]
+        public CreateTaskModel(ApplicationDBContext db, UserManager<FarmApplicationDBUser> userManager)
         {
-            _db = db;   
-        }
+            _db = db;
+			this._userManager = userManager;
+		}
 
         public List<Field> Fields { get; set; }
         [BindProperty]
@@ -49,8 +53,9 @@ namespace FarmApplication.Pages
             {
                 return Page(); // Return the page with validation errors
             }
-            //var NewNewFieldTask = _db.Fields.Find(SelectFieldID);
+			//var NewNewFieldTask = _db.Fields.Find(SelectFieldID);
 
+			var currentUser = await _userManager.GetUserAsync(User);
 
 			var selectedField = _db.Fields.Find(SelectFieldID);
 			var selectedResource = _db.Resources.Find(SelectResourceID);
@@ -75,6 +80,7 @@ namespace FarmApplication.Pages
 			newTask.EquipmentValues = _db.Equipment.Find(SelectEquipmentID);
 			newTask.WorkersValues = _db.Workers.Find(SelectWorkerID);
 
+            newTask.UserID = currentUser.Id;
 
 
 			_db.Tasks.Add(newTask);

@@ -14,20 +14,20 @@
 		-->
 		<div asp-validation-summary="All"></div>
 		<div class="mb-3">
-			<label asp-for="WorkersOnFarm.WorkerName">Employee Name</label>
-			<input asp-for="WorkersOnFarm.WorkerName" class="form-control" />
+			<label asp-for="workers.WorkerName">Employee Name</label>
+			<input asp-for="workers.WorkerName" class="form-control" />
 			<!-- you can type in a custom error between class="text-danger"> Custom error here </span> however it will overpower other error displays -->
-			<span asp-validation-for="WorkersOnFarm.WorkerName" class="text-danger"></span>
+			<span asp-validation-for="workers.WorkerName" class="text-danger"></span>
 		</div>
 		<div class="mb-3">
-			<label asp-for="WorkersOnFarm.WorkerSalary">Salary </label>
-			<input asp-for="WorkersOnFarm.WorkerSalary" class="form-control" />
-			<span asp-validation-for="WorkersOnFarm.WorkerSalary" class="text-danger"></span>
+			<label asp-for="workers.WorkerSalary">Salary </label>
+			<input asp-for="workers.WorkerSalary" class="form-control" />
+			<span asp-validation-for="workers.WorkerSalary" class="text-danger"></span>
 		</div>
 		<div class="mb-3">
-			<label asp-for="WorkersOnFarm.EmployedUntil">Employed Until </label>
-			<input asp-for="WorkersOnFarm.EmployedUntil" class="form-control" />
-			<span asp-validation-for="WorkersOnFarm.EmployedUntil" class="text-danger"></span>
+			<label asp-for="workers.EmployedUntil">Employed Until </label>
+			<input asp-for="workers.EmployedUntil" class="form-control" />
+			<span asp-validation-for="workers.EmployedUntil" class="text-danger"></span>
 		</div>
 		<button type="submit" class="btn btn-primary" style="width:150px;">Add Employee</button>
 		<a asp-page="ResourceIndex" class="btn btn-primary" style="width:150px;">Back To List</a>

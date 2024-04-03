@@ -1,11 +1,18 @@
 ﻿@page
 @model FarmApplication.Pages.CreateTaskModel
 
+@using System.Security.Claims
+
+
+@{
+    var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Retrieve current user's ID
+}
 
 <!-- this allows me to display all the data from a table in a dropdown menu
     I will prob use this to allow the user to select everyting they want for a task and maybe save that as its own table entry (FarmTasks)
     (should ask for quantities of certain items)
 -->
+
 <h3>Select a Field</h3>
 <form method="post">
 <div class="border p-3 mt-4">
@@ -13,7 +20,7 @@
         <option value="">None</option>
             @if (Model.Fields != null)
             {
-                foreach (var item in Model.Fields)
+                foreach (var item in Model.Fields.Where(f => f.UserID == currentUserId))
                 {
                     <option value="@item.FieldID">@item.FieldName</option>
                 }
@@ -24,7 +31,7 @@
 <div class="border p-3 mt-4">
     <select asp-for="SelectResourceID" class="form-control">
         <option value="">None</option>
-        @foreach (var item in Model.Resources)
+            @foreach (var item in Model.Resources.Where(f => f.UserID == currentUserId))
         {
             <option value="@item.ResourceId">@item.ResourceName</option>
         }
@@ -37,7 +44,7 @@
 <div class="border p-3 mt-4">
     <select asp-for="SelectEquipmentID" class="form-control">
         <option value="">None</option>
-        @foreach (var item in Model.Equipments)
+            @foreach (var item in Model.Equipments.Where(f => f.UserID == currentUserId))
         {
             <option value="@item.Id">@item.EquipmentName</option>
         }
@@ -47,7 +54,7 @@
 <div class="border p-3 mt-4">
     <select asp-for="SelectWorkerID" class="form-control">
         <option value="">None</option>
-        @foreach (var item in Model.Worker)
+            @foreach (var item in Model.Worker.Where(f => f.UserID == currentUserId))
         {
             <option value="@item.WorkerID">@item.WorkerName</option>
         }
