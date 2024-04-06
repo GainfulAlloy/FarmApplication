@@ -98,7 +98,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach (var task in Model.TaskTimetable)
+		@foreach (var task in Model.TaskTimetable.Where(f => f.UserID == currentUserId))
 		{
 			<tr>
 				<td>@task.TaskName</td>
