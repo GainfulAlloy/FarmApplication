@@ -13,6 +13,17 @@
 	var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Retrieve current user's ID
 }
 
+<!-- Important: the calendar page is returned if the model is invalid, this below can help you determine if the opperation was a success -->
+
+@if (TempData["success"] != null)
+{
+
+	<p class="text-success">@TempData["success"]</p>
+
+}
+
+<!-- this table is mostly here for testing reasons -->
+
 <div class="container p-3">
 	<div class="row pt-4">		
 		<div class="col-6 text-end">
@@ -27,6 +38,9 @@
 	<table class="table table-bordered table-striped" style="width:100%">
 		<thead>
 			<tr>
+				<th>
+					Task
+				</th>
 				<th>
 					Field
 				</th>
@@ -45,6 +59,7 @@
 			@foreach (var obj in Model.FarmTask.Where(f => f.UserID == currentUserId))
 			{
 				<tr>
+					<td width="20%">@obj.TaskName</td>
 					<td width="20%">@obj.FieldValues.FieldName</td>
 					<td width="20%">@obj.ResourcesValues.ResourceName.ToString()</td>
 					<td width="20%">@obj.EquipmentValues.EquipmentName.ToString()</td>
@@ -63,4 +78,57 @@
 	</table>
 
 </div>
+
+
+<!-- WIP calendar feature (need to add the start and end datatype to the task database) and then need to modify to grab that data -->
+
+
+
+<!-- it took way to long to learn to change this input id field to fix it all :/ -->
+<!-- this timetable will display all tasks that start on the selected date -->
+
+<input id="selectedDay" type="date" asp-for="SelectedDay" />
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Start Time</th>
+			<th>End Time</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var task in Model.TaskTimetable)
+		{
+			<tr>
+				<td>@task.TaskName</td>
+				<td>@task.TaskStart.ToShortTimeString()</td>
+				<td>@task.TaskEnd.ToShortTimeString()</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+@section Scripts {
+	<script>
+		document.getElementById('selectedDay').addEventListener('change', function () {
+			var selectedDay = this.value;
+			window.location.href = '/Calendar?selectedDay=' + selectedDay;
+		});
+	</script>
+}
+
+
+<!-- i could maybe use this instead, let the user pick any day
+<div class="mb-3">
+	<label asp-for="Start">Task start</label>
+	<input asp-for="Start" class="form-control" />
+	<span asp-validation-for="Start" class="text-danger"></span>
+</div>
+-->
+
+
+<!-- this is supposed to be a live calendar (doesnt work if the section above is present) -->
+
+
 

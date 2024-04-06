@@ -42,6 +42,9 @@ What I think we need to do:
 - update tables so that they have a foregin key to aspnetusers so that i can use a where clause to try and only show data related to their account
 - Add a task time start and end, i would like to have a calendar page to display all active/ upcoming tasks. Remove data as time passes.
 - remove quantities of resources if used in a task.
+- Need to add a Name of task column and date/ time of task
+
+- 
 
 I think that in order to add the user data to the tables, I should grab the user id as the table column then use the feature in calendar.cshtml to get the id
 
@@ -67,3 +70,9 @@ It will break the foreign key saving for user data.
 This error can occur when using update-database, to fix find the referenced line in the migration file and change "Cascade" to "Delete".
 Introducing FOREIGN KEY constraint 'FK_Tasks_FarmApplicationDBUser_UserID' on table 'Tasks' may cause cycles or multiple cascade paths. Specify ON DELETE NO ACTION or ON UPDATE NO ACTION, or modify other FOREIGN KEY constraints.
 
+
+
+
+------------------------------------------------
+The next task I want to do is maybe re adding equipment count (or specific resources) after the task has completed.
+(I imagine I can look for for tasks that pass the end date and then use an add by the number in the task equipment count to the fk.id of the equipment items own count) 

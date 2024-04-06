@@ -13,8 +13,23 @@
     (should ask for quantities of certain items)
 -->
 
-<h3>Select a Field</h3>
+
+
+<!-- If adding new datatypes to the FarmTask model put them in the form class below -->
+
 <form method="post">
+
+<h3>Name of the Task</h3>
+<div class="mb-3">
+	<label asp-for="Name">Task name</label>
+	<input asp-for="Name" class="form-control" />
+		<!-- you can type in a custom error between class="text-danger"> Custom error here </span> however it will overpower other error displays -->
+	<span asp-validation-for="Name" class="text-danger"></span>
+</div>
+
+
+
+<h3>Select a Field</h3>
 <div class="border p-3 mt-4">
     <select asp-for="SelectFieldID" class="form-control">
         <option value="">None</option>
@@ -39,6 +54,15 @@
 </div>
 
 <!-- in this gap i want to add a text field where the user can type in the quantity of the resource that they want to use -->
+    <h3>Amount of resources to use </h3>
+    <div class="mb-3">
+        <label asp-for="ResourceCountToUse">Enter the number of resources to use:</label>
+        <input asp-for="ResourceCountToUse" class="form-control" />
+        <span asp-validation-for="ResourceCountToUse" class="text-danger"></span>
+    </div>
+
+
+
 
 <h3>Select the Equipment to use</h3>
 <div class="border p-3 mt-4">
@@ -50,6 +74,16 @@
         }
     </select>
 </div>
+
+
+    <h3>Amount of Equipment to use </h3>
+    <div class="mb-3">
+        <label asp-for="EquipmentCountToUse">Enter the number of resources to use:</label>
+        <input asp-for="EquipmentCountToUse" class="form-control" />
+        <span asp-validation-for="EquipmentCountToUse" class="text-danger"></span>
+    </div>
+
+
 <h3>Select any workers for this task</h3>
 <div class="border p-3 mt-4">
     <select asp-for="SelectWorkerID" class="form-control">
@@ -60,5 +94,32 @@
         }
     </select>
 </div>
+
+    <h3>Time to start Task</h3>
+    <div class="mb-3">
+        <label asp-for="Start">Task start</label>
+        <input asp-for="Start" class="form-control" />
+        <!-- you can type in a custom error between class="text-danger"> Custom error here </span> however it will overpower other error displays -->
+        <span asp-validation-for="Start" class="text-danger"></span>
+    </div>
+
+    <h3>Time to end Task</h3>
+    <div class="mb-3">
+        <label asp-for="End">Task end</label>
+        <input asp-for="End" class="form-control" />
+        <!-- you can type in a custom error between class="text-danger"> Custom error here </span> however it will overpower other error displays -->
+        <span asp-validation-for="End" class="text-danger"></span>
+    </div>
+
+
+
     <button type="submit" class="btn btn-primary" style="width:150px;">Add Task</button>
+
+    <!--
+    <button type="submit" class="btn btn-primary" style="width:150px;"
+            disabled="@(!ModelState.IsValid)">
+        Add Task
+	</button>
+	-->
+
 </form>
