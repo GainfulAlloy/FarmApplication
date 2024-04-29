@@ -1,8 +1,134 @@
 ﻿@page
 @model FarmApplication.Pages.CalendarModel
 
+@using System.Security.Claims
+
 <div class="text-center">
 	<h1 class="accordion-body">Calendar page</h1>
 	<p> This page should show a timetable like thing with a clock that shows when activities in different fields are happening</p>
 	<p> Sort of like the timetable on blackboard, should also display the resources being used </p>
 </div>
+
+@{
+	var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Retrieve current user's ID
+}
+
+<!-- Important: the calendar page is returned if the model is invalid, this below can help you determine if the opperation was a success -->
+
+@if (TempData["success"] != null)
+{
+
+	<p class="text-success">@TempData["success"]</p>
+
+}
+
+<!-- this table is mostly here for testing reasons -->
+
+<div class="container p-3">
+	<div class="row pt-4">		
+		<div class="col-6 text-end">
+			<a asp-page="CreateTask" class="btn btn-primary">
+				Create new Task
+			</a>
+		</div>
+	</div>
+
+	<br /><br />
+
+	<table class="table table-bordered table-striped" style="width:100%">
+		<thead>
+			<tr>
+				<th>
+					Task
+				</th>
+				<th>
+					Field
+				</th>
+				<th>
+					resource
+				</th>
+				<th>
+					equipment
+				</th>
+				<th>
+					workers available
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var obj in Model.FarmTask.Where(f => f.UserID == currentUserId))
+			{
+				<tr>
+					<td width="20%">@obj.TaskName</td>
+					<td width="20%">@obj.FieldValues.FieldName</td>
+					<td width="20%">@obj.ResourcesValues.ResourceName.ToString()</td>
+					<td width="20%">@obj.EquipmentValues.EquipmentName.ToString()</td>
+					<td width="20%">@obj.WorkersValues.WorkerName.ToString()</td>
+					<td>
+						<div class="w-75 btn-group" role="group">
+							<a asp-page="EditResource" asp-route-id="@obj.TaskID" class="btn btn-primary mx-2">
+								Edit
+							</a>
+							<a asp-page="DeleteField" asp-route-id="@obj.TaskID" class="btn btn-danger mx-2">Delete</a>
+						</div>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+
+</div>
+
+
+<!-- WIP calendar feature (need to add the start and end datatype to the task database) and then need to modify to grab that data -->
+
+
+
+<!-- it took way to long to learn to change this input id field to fix it all :/ -->
+<!-- this timetable will display all tasks that start on the selected date -->
+
+<input id="selectedDay" type="date" asp-for="SelectedDay" />
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Start Time</th>
+			<th>End Time</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var task in Model.TaskTimetable.Where(f => f.UserID == currentUserId))
+		{
+			<tr>
+				<td>@task.TaskName</td>
+				<td>@task.TaskStart.ToShortTimeString()</td>
+				<td>@task.TaskEnd.ToShortTimeString()</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+@section Scripts {
+	<script>
+		document.getElementById('selectedDay').addEventListener('change', function () {
+			var selectedDay = this.value;
+			window.location.href = '/Calendar?selectedDay=' + selectedDay;
+		});
+	</script>
+}
+
+
+<!-- i could maybe use this instead, let the user pick any day
+<div class="mb-3">
+	<label asp-for="Start">Task start</label>
+	<input asp-for="Start" class="form-control" />
+	<span asp-validation-for="Start" class="text-danger"></span>
+</div>
+-->
+
+
+<!-- this is supposed to be a live calendar (doesnt work if the section above is present) -->
+
+
+

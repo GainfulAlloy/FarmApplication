@@ -4,6 +4,7 @@ using FarmApplication.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FarmApplication.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240402150041_impraying")]
+    partial class impraying
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,30 +154,14 @@ namespace FarmApplication.Migrations
                     b.Property<int>("ResourcesValuesResourceId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("TaskEnd")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("TaskEquipment")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TaskEquipmentCount")
                         .HasColumnType("int");
 
                     b.Property<int>("TaskField")
                         .HasColumnType("int");
 
-                    b.Property<string>("TaskName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TaskResourceCount")
-                        .HasColumnType("int");
-
                     b.Property<int>("TaskResources")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("TaskStart")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("TaskWorker")
                         .HasColumnType("int");

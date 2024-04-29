@@ -7,6 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20240221145157_AddFieldsToDB.cs" />
+    <Compile Remove="Migrations\20240221145157_AddFieldsToDB.Designer.cs" />
+    <Compile Remove="Migrations\20240326111343_fieldIDTest.cs" />
+    <Compile Remove="Migrations\20240326111343_fieldIDTest.Designer.cs" />
+    <Compile Remove="Migrations\20240326155404_ThreeNewTables.cs" />
+    <Compile Remove="Migrations\20240326155404_ThreeNewTables.Designer.cs" />
+    <Compile Remove="Migrations\20240401145426_plsworkkkkkkkk.cs" />
+    <Compile Remove="Migrations\20240401145426_plsworkkkkkkkk.Designer.cs" />
+    <Compile Remove="Migrations\20240401185545_helpmemememe.cs" />
+    <Compile Remove="Migrations\20240401185545_helpmemememe.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.2" />

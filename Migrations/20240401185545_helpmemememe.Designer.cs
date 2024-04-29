@@ -4,6 +4,7 @@ using FarmApplication.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FarmApplication.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240401185545_helpmemememe")]
+    partial class helpmemememe
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,13 +100,7 @@ namespace FarmApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Equipment");
                 });
@@ -123,13 +120,7 @@ namespace FarmApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("ResourceId");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Resources");
                 });
@@ -151,37 +142,17 @@ namespace FarmApplication.Migrations
                     b.Property<int>("ResourcesValuesResourceId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("TaskEnd")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("TaskEquipment")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TaskEquipmentCount")
                         .HasColumnType("int");
 
                     b.Property<int>("TaskField")
                         .HasColumnType("int");
 
-                    b.Property<string>("TaskName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TaskResourceCount")
-                        .HasColumnType("int");
-
                     b.Property<int>("TaskResources")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("TaskStart")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("TaskWorker")
                         .HasColumnType("int");
-
-                    b.Property<string>("UserID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("WorkersValuesWorkerID")
                         .HasColumnType("int");
@@ -193,8 +164,6 @@ namespace FarmApplication.Migrations
                     b.HasIndex("FieldValuesFieldID");
 
                     b.HasIndex("ResourcesValuesResourceId");
-
-                    b.HasIndex("UserID");
 
                     b.HasIndex("WorkersValuesWorkerID");
 
@@ -238,10 +207,6 @@ namespace FarmApplication.Migrations
                     b.Property<DateTime>("EmployedUntil")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UserID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("WorkerName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -251,31 +216,7 @@ namespace FarmApplication.Migrations
 
                     b.HasKey("WorkerID");
 
-                    b.HasIndex("UserID");
-
                     b.ToTable("Workers");
-                });
-
-            modelBuilder.Entity("FarmApplication.Model.Equipment", b =>
-                {
-                    b.HasOne("FarmApplication.Areas.Identity.Data.FarmApplicationDBUser", "AspNetUsers")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AspNetUsers");
-                });
-
-            modelBuilder.Entity("FarmApplication.Model.FarmResources", b =>
-                {
-                    b.HasOne("FarmApplication.Areas.Identity.Data.FarmApplicationDBUser", "AspNetUsers")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AspNetUsers");
                 });
 
             modelBuilder.Entity("FarmApplication.Model.FarmTasks", b =>
@@ -298,19 +239,11 @@ namespace FarmApplication.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FarmApplication.Areas.Identity.Data.FarmApplicationDBUser", "AspNetUsers")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FarmApplication.Model.Workers", "WorkersValues")
                         .WithMany()
                         .HasForeignKey("WorkersValuesWorkerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("AspNetUsers");
 
                     b.Navigation("EquipmentValues");
 
@@ -322,17 +255,6 @@ namespace FarmApplication.Migrations
                 });
 
             modelBuilder.Entity("FarmApplication.Model.Field", b =>
-                {
-                    b.HasOne("FarmApplication.Areas.Identity.Data.FarmApplicationDBUser", "AspNetUsers")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AspNetUsers");
-                });
-
-            modelBuilder.Entity("FarmApplication.Model.Workers", b =>
                 {
                     b.HasOne("FarmApplication.Areas.Identity.Data.FarmApplicationDBUser", "AspNetUsers")
                         .WithMany()

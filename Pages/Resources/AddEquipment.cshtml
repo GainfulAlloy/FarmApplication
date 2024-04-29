@@ -1,0 +1,40 @@
+﻿@page
+@model FarmApplication.Pages.Resources.AddEquipmentModel
+
+
+
+<form method="post">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary pl-3">Add New Item</h2>
+			<hr />
+		</div>
+		<!-- this line will display errors for custom errors in the .cs file
+			you can set ModelOnly to All
+		<div asp-validation-summary="ModelOnly"></div>
+		-->
+		<div asp-validation-summary="All"></div>
+		<div class="mb-3">
+			<label asp-for="equipment.EquipmentName">Equipment Name</label>
+			<input asp-for="equipment.EquipmentName" class="form-control" />
+			<!-- you can type in a custom error between class="text-danger"> Custom error here </span> however it will overpower other error displays -->
+			<span asp-validation-for="equipment.EquipmentName" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="equipment.EquipmentCount">Amount of item on hand</label>
+			<input asp-for="equipment.EquipmentCount" class="form-control" />
+			<span asp-validation-for="equipment.EquipmentCount" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-primary" style="width:150px;">Add Equipment</button>
+		<a asp-page="ResourceIndex" class="btn btn-primary" style="width:150px;">Back To List</a>
+	</div>
+</form>
+
+<!-- this section causes errors caught in this page to be client side validated instead of server (page wont refresh).
+	note - the custom validation in the .cs file will still be server validated.
+-->
+@section scripts {
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

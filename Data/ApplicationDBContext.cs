@@ -1,4 +1,5 @@
 ﻿using FarmApplication.Model;
+using Humanizer.Localisation;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -13,5 +14,9 @@ namespace FarmApplication.Data
         
         }
         public DbSet<Field> Fields { get; set; }
-    }
+		public DbSet<FarmResources> Resources { get; set; }
+		public DbSet<Equipment> Equipment { get; set; }
+		public DbSet<Workers> Workers { get; set; }
+        public DbSet<FarmTasks> Tasks { get; set; }
+	}
 }

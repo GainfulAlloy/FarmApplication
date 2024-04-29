@@ -37,13 +37,13 @@
 
 @section Scripts {
 	@await RenderSectionAsync("Scripts", required: false)
-	<!-- this highlights the tabs for login and registration. should only highlight active one. (change the != 1 to fix) -->
+	<!-- this highlights the tabs for login and registration. should only highlight active one. (change the != -1 to change active tab) -->
 	<script>
 		$(function () {
 			const currentpage = location.pathname;
 			$('.nav-tabs li a').each(function () {
 				const $this = $(this);
-				if (currentpage.toLowerCase().indexOf($this.attr('href').toLowerCase()) != 1) {
+				if (currentpage.toLowerCase().indexOf($this.attr('href').toLowerCase()) != -1) {
 					$this.addClass('active')
 				}
 			})
