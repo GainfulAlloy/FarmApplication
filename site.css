@@ -1,0 +1,69 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+/*Navbar styling*/
+
+.navheader {
+    /*background-image: linear-gradient(to left, #a1ad79, #89bb09);*/
+    background-image: radial-gradient(#a1ad79, #a1ad79)
+}
+
+.navcontainer {
+    background-image: linear-gradient(to left, #a1ad79, #a1ad79);
+    
+    padding: 15px;
+    padding-left: 450px;
+    padding-right: 1137px;
+}
+
+/*===============*/
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    background-color: lightgrey;
+    margin-bottom: 60px;
+}
+
+thead {
+    background-color: lightgrey;
+    border: 10px;
+}
+
+form{
+    display: container;
+    border: 20px;
+    padding: 20px;
+    border-color: black;
+}
+.createfield{
+    border-style: solid;
+    border: 20px;
+    border-color: black;
+}
+
+header  *{
+    
+}
+.footborder {
+    background-image: linear-gradient(to left, #a1ad79, #89bb09);
+    
+}
+.footcontainer {
+    background-image: linear-gradient(to left, #a1ad79, #a1ad79);
+    padding: 10px;
+    padding-left: 450px;
+    padding-right: 1137px;
+}
