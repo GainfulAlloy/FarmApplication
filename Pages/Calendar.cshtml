@@ -60,10 +60,10 @@
 			{
 				<tr>
 					<td width="20%">@obj.TaskName</td>
-					<td width="20%">@obj.FieldValues.FieldName</td>
-					<td width="20%">@obj.ResourcesValues.ResourceName.ToString()</td>
-					<td width="20%">@obj.EquipmentValues.EquipmentName.ToString()</td>
-					<td width="20%">@obj.WorkersValues.WorkerName.ToString()</td>
+					<td width="20%">@(obj.FieldValues?.FieldName ?? "No Field")</td>
+					<td width="20%">@(obj.ResourcesValues?.ResourceName?.ToString() ?? "No Resources")</td>
+					<td width="20%">@(obj.EquipmentValues?.EquipmentName?.ToString() ?? "No Equipment")</td>
+					<td width="20%">@(obj.WorkersValues?.WorkerName?.ToString() ?? "No Workers")</td>
 					<td>
 						<div class="w-75 btn-group" role="group">
 							<a asp-page="EditResource" asp-route-id="@obj.TaskID" class="btn btn-primary mx-2">

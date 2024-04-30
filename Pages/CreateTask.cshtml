@@ -66,7 +66,7 @@
 
 <h3>Select the Equipment to use</h3>
 <div class="border p-3 mt-4">
-    <select asp-for="SelectEquipmentID" class="form-control">
+        <select asp-for="SelectEquipmentID" class="form-control">
         <option value="">None</option>
             @foreach (var item in Model.Equipments.Where(f => f.UserID == currentUserId))
         {

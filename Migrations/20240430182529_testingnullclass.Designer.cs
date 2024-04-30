@@ -4,6 +4,7 @@ using FarmApplication.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FarmApplication.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240430182529_testingnullclass")]
+    partial class testingnullclass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,10 +148,10 @@ namespace FarmApplication.Migrations
                     b.Property<int?>("EquipmentValuesId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FieldValuesFieldID")
+                    b.Property<int>("FieldValuesFieldID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ResourcesValuesResourceId")
+                    b.Property<int>("ResourcesValuesResourceId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("TaskEnd")
@@ -183,7 +186,7 @@ namespace FarmApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("WorkersValuesWorkerID")
+                    b.Property<int>("WorkersValuesWorkerID")
                         .HasColumnType("int");
 
                     b.HasKey("TaskID");
@@ -286,11 +289,15 @@ namespace FarmApplication.Migrations
 
                     b.HasOne("FarmApplication.Model.Field", "FieldValues")
                         .WithMany()
-                        .HasForeignKey("FieldValuesFieldID");
+                        .HasForeignKey("FieldValuesFieldID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FarmApplication.Model.FarmResources", "ResourcesValues")
                         .WithMany()
-                        .HasForeignKey("ResourcesValuesResourceId");
+                        .HasForeignKey("ResourcesValuesResourceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FarmApplication.Areas.Identity.Data.FarmApplicationDBUser", "AspNetUsers")
                         .WithMany()
@@ -300,7 +307,9 @@ namespace FarmApplication.Migrations
 
                     b.HasOne("FarmApplication.Model.Workers", "WorkersValues")
                         .WithMany()
-                        .HasForeignKey("WorkersValuesWorkerID");
+                        .HasForeignKey("WorkersValuesWorkerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("AspNetUsers");
 

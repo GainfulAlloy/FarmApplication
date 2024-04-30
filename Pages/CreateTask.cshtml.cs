@@ -42,19 +42,19 @@ namespace FarmApplication.Pages
 
         public List<Field> Fields { get; set; }
         [BindProperty]
-        public int SelectFieldID { get; set; }
+        public int? SelectFieldID { get; set; }
 
         public List<FarmResources> Resources { get; set; }
         [BindProperty]
-        public int SelectResourceID { get; set; }
+        public int? SelectResourceID { get; set; }
 
         public List<Equipment> Equipments { get; set; }
         [BindProperty]
-        public int SelectEquipmentID { get; set; }
+        public int? SelectEquipmentID { get; set; }
 
         public List<Workers> Worker {  get; set; }
         [BindProperty]
-        public int SelectWorkerID { get; set; }
+        public int? SelectWorkerID { get; set; }
 
 		public void OnGet()
         {
@@ -77,7 +77,8 @@ namespace FarmApplication.Pages
 
             if (!ModelState.IsValid)
             {
-                return Page(); // Return the page with validation errors
+                //return RedirectToPage("Index"); // Return the page with validation errors
+                return Page();
             }
 			//var NewNewFieldTask = _db.Fields.Find(SelectFieldID);
 
@@ -90,45 +91,52 @@ namespace FarmApplication.Pages
 
 
             // this allows me to check if the user actually has that much of a resource
-            var SelctingNum = _db.Resources.Find(SelectResourceID);
-            var EPICNUM = SelctingNum.ResourceCount;
-            if(ResourceCountToUse > EPICNUM)
-            {
-                ModelState.AddModelError("ResourceCountToUse", "ResourceCountToUse should not be greater than EPICNUM.");
-			}
+
+
+            if ( SelectResourceID != null)
+            {                   
+                var SelctingNum = _db.Resources.Find(SelectResourceID);
+                var EPICNUM = SelctingNum.ResourceCount;
+                if(ResourceCountToUse > EPICNUM)
+                {
+                    ModelState.AddModelError("ResourceCountToUse", "ResourceCountToUse should not be greater than EPICNUM.");
+			    }
 
 
 
-            // All this allows me to remove resourceCount from the Resource Table
-			var selectedResource = await _db.Resources.FindAsync(SelectResourceID);
+                // All this allows me to remove resourceCount from the Resource Table
+			    var selectedResource = await _db.Resources.FindAsync(SelectResourceID);
 
-			if (selectedResource == null)
-			{
-				ModelState.AddModelError("SelectResourceID", "Selected resource not found.");
-				//return Page();
-			}
+			    if (selectedResource == null)
+			    {
+				    ModelState.AddModelError("SelectResourceID", "Selected resource not found.");
+				    //return Page();
+			    }
 
-			if (ResourceCountToUse > selectedResource.ResourceCount)
-			{
-				ModelState.AddModelError("ResourceCountToUse", "ResourceCountToUse should not be greater than available ResourceCount.");
-				//return Page();
-			}
-
-			// Update ResourceCount in FarmResources table
-			selectedResource.ResourceCount -= ResourceCountToUse;
-
-
-            var findEquipmentFK = _db.Equipment.Find(SelectEquipmentID);
-            var ComparisonNum = findEquipmentFK.EquipmentCount;
-            if (EquipmentCountToUse > ComparisonNum)
-            {
-                ModelState.AddModelError("EquipmentCountToUse", "EquipmentCountToUse should not be greater than comparison number.");
+			    if (ResourceCountToUse > selectedResource.ResourceCount)
+			    {
+				    ModelState.AddModelError("ResourceCountToUse", "ResourceCountToUse should not be greater than available ResourceCount.");
+				    //return Page();
+			    }
+                
+			    // Update ResourceCount in FarmResources table
+			    selectedResource.ResourceCount -= ResourceCountToUse;
             }
-            findEquipmentFK.EquipmentCount -= EquipmentCountToUse;
+            
+
+            if (SelectEquipmentID != null)
+            {
+                var findEquipmentFK = _db.Equipment.Find(SelectEquipmentID);
+                var ComparisonNum = findEquipmentFK.EquipmentCount;
+                if (EquipmentCountToUse > ComparisonNum)
+                {
+                    ModelState.AddModelError("EquipmentCountToUse", "EquipmentCountToUse should not be greater than comparison number.");
+                }
+                findEquipmentFK.EquipmentCount -= EquipmentCountToUse;
+            }   
 
 
-
-
+            // maybe get rid of the model state validations to allow nulls????
 
             // This will input the ID's of the options chosen from the drop down menu
             if (ModelState.IsValid)
@@ -138,22 +146,32 @@ namespace FarmApplication.Pages
                 var newTask = new FarmApplication.Model.FarmTasks
                 {
 
-                TaskField = SelectFieldID,
-                TaskResources = SelectResourceID,
-                TaskEquipment = SelectEquipmentID,
-                TaskWorker = SelectWorkerID,
-                TaskName = Name,
-                TaskStart = Start,
-                TaskEnd = End,
-                TaskResourceCount = ResourceCountToUse,
-                TaskEquipmentCount = EquipmentCountToUse,
+                    TaskField = SelectFieldID,
+                    TaskResources = SelectResourceID,
+                    TaskEquipment = SelectEquipmentID,
+                    TaskWorker = SelectWorkerID,
+                    TaskName = Name,
+                    TaskStart = Start,
+                    TaskEnd = End,
+                    TaskResourceCount = ResourceCountToUse,
+                    TaskEquipmentCount = EquipmentCountToUse,
                 };
 
-			    newTask.FieldValues = _db.Fields.Find(SelectFieldID);
-			    newTask.ResourcesValues = _db.Resources.Find(SelectResourceID);
-			    newTask.EquipmentValues = _db.Equipment.Find(SelectEquipmentID);
-			    newTask.WorkersValues = _db.Workers.Find(SelectWorkerID);
-
+                if (SelectFieldID != null)
+                {
+                    newTask.FieldValues = _db.Fields.Find(SelectFieldID);
+                }
+                if (SelectResourceID != null)
+                {
+                    newTask.ResourcesValues = _db.Resources.Find(SelectResourceID);
+                }
+                if (SelectEquipmentID != null) { 
+                    newTask.EquipmentValues = _db.Equipment.Find(SelectEquipmentID);
+                }
+                if (SelectWorkerID != null)
+                {
+                    newTask.WorkersValues = _db.Workers.Find(SelectWorkerID);
+                }
                 newTask.UserID = currentUser.Id;
             
 

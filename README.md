@@ -76,3 +76,11 @@ Introducing FOREIGN KEY constraint 'FK_Tasks_FarmApplicationDBUser_UserID' on ta
 ------------------------------------------------
 The next task I want to do is maybe re adding equipment count (or specific resources) after the task has completed.
 (I imagine I can look for for tasks that pass the end date and then use an add by the number in the task equipment count to the fk.id of the equipment items own count) 
+
+Other Tasks: 
+- Allowing null values in the create task page (not everyone needs to use a resource)
+- Make home and settings page look nice/ give some purpose
+- change the task time start/ end input to get rid of the milsecs
+
+allowing nuls in the calendar - add ? to the fields and FKs in the class file, add migration, update. in cshtml, add ? to class fields again, then add (if null checks).
+Lastly change the table on the calendar page.
