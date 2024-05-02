@@ -84,3 +84,5 @@ Other Tasks:
 
 allowing nuls in the calendar - add ? to the fields and FKs in the class file, add migration, update. in cshtml, add ? to class fields again, then add (if null checks).
 Lastly change the table on the calendar page.
+
+Maybe put a "Tasks Today on the home page"
