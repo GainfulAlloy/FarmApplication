@@ -77,9 +77,10 @@ namespace FarmApplication.Pages
 
             if (!ModelState.IsValid)
             {
-                //return RedirectToPage("Index"); // Return the page with validation errors
+				//return RedirectToPage("Index"); // Return the page with validation errors
+				ModelState.AddModelError("Name", "Name cant be blank");
                 return Page();
-            }
+			}
 			//var NewNewFieldTask = _db.Fields.Find(SelectFieldID);
 
 			var currentUser = await _userManager.GetUserAsync(User);
@@ -92,15 +93,22 @@ namespace FarmApplication.Pages
 
             // this allows me to check if the user actually has that much of a resource
 
+            /*if (string.IsNullOrWhiteSpace(Name))
+			{
+				ModelState.AddModelError("Name", "Name cant be blank");
+				return RedirectToPage("Calendar");
+			}*/
 
+            // i couldnt get the error handling to work very well
             if ( SelectResourceID != null)
             {                   
                 var SelctingNum = _db.Resources.Find(SelectResourceID);
                 var EPICNUM = SelctingNum.ResourceCount;
                 if(ResourceCountToUse > EPICNUM)
                 {
-                    ModelState.AddModelError("ResourceCountToUse", "ResourceCountToUse should not be greater than EPICNUM.");
-			    }
+                    ModelState.AddModelError("ResourceCountToUse", "You dont have the written amount of this resouce available");
+                    return BadRequest(ModelState);
+                }
 
 
 
@@ -110,13 +118,13 @@ namespace FarmApplication.Pages
 			    if (selectedResource == null)
 			    {
 				    ModelState.AddModelError("SelectResourceID", "Selected resource not found.");
-				    //return Page();
+                    return BadRequest(ModelState);
 			    }
 
 			    if (ResourceCountToUse > selectedResource.ResourceCount)
 			    {
 				    ModelState.AddModelError("ResourceCountToUse", "ResourceCountToUse should not be greater than available ResourceCount.");
-				    //return Page();
+                    return BadRequest(ModelState);
 			    }
                 
 			    // Update ResourceCount in FarmResources table
@@ -130,7 +138,8 @@ namespace FarmApplication.Pages
                 var ComparisonNum = findEquipmentFK.EquipmentCount;
                 if (EquipmentCountToUse > ComparisonNum)
                 {
-                    ModelState.AddModelError("EquipmentCountToUse", "EquipmentCountToUse should not be greater than comparison number.");
+                    ModelState.AddModelError("EquipmentCountToUse", "EquipmentCountToUse should not be greater than whats on hand");
+                    return BadRequest(ModelState);
                 }
                 findEquipmentFK.EquipmentCount -= EquipmentCountToUse;
             }   
@@ -175,18 +184,19 @@ namespace FarmApplication.Pages
                 newTask.UserID = currentUser.Id;
             
 
+               
 			    _db.Tasks.Add(newTask);
                 await _db.SaveChangesAsync();
 				TempData["success"] = "Field Created";
 
 
 			}
-            // !!!!! Improtant notice, the Calendar page gets returned even if the model is invalid (couldnt figure out a way to return the page without it crashing)
-            return RedirectToPage("Calendar");
+			// !!!!! Improtant notice, the Calendar page gets returned even if the model is invalid (couldnt figure out a way to return the page without it crashing)
 
-            // doesnt seem to be working atm
-            return Page();
-            //return RedirectToPage("Calendar");            
+
+			// doesnt seem to be working atm
+			//return Page();
+            return RedirectToPage("Calendar");            
         }
 
     }

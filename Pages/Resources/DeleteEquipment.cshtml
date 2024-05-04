@@ -1,0 +1,34 @@
+﻿@page
+@model FarmApplication.Pages.Resources.EditEquipmentModel
+
+
+
+<form method="post">
+	<input hidden asp-for="equipment.Id" />
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary pl-3">Remove Item</h2>
+			<hr />
+		</div>
+		<div class="mb-3">
+			<label asp-for="equipment.EquipmentName">Equipment Name</label>
+			<input asp-for="equipment.EquipmentName" disabled class="form-control" />
+		</div>
+		<div class="mb-3">
+			<label asp-for="equipment.EquipmentCount">Amount of item on hand</label>
+			<input asp-for="equipment.EquipmentCount" disabled class="form-control" />
+		</div>
+		<button type="submit" class="btn btn-primary" style="width:150px;">Delete Equipment</button>
+		<a asp-page="ResourceIndex" class="btn btn-primary" style="width:150px;">Back To List</a>
+	</div>
+</form>
+
+<!-- this section causes errors caught in this page to be client side validated instead of server (page wont refresh).
+	note - the custom validation in the .cs file will still be server validated.
+-->
+@section scripts {
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}
+

@@ -15,7 +15,7 @@ namespace FarmApplication.Pages.Resources
 
 
 		// i dont know why it needs a dependency injection here???
-		[ActivatorUtilitiesConstructor]
+		//[ActivatorUtilitiesConstructor]
 		public ResourceIndexModel(ApplicationDBContext db)
 		{
 			_db = db;
@@ -28,5 +28,9 @@ namespace FarmApplication.Pages.Resources
 			Equipments = _db.Equipment;
 			WorkersOnFarm = _db.Workers;
 		}
+
+		
+
+
 	}
 }
