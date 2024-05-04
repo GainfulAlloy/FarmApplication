@@ -30,8 +30,8 @@ namespace FarmApplication.Model
         public Workers? WorkersValues { get; set; }
 
 		public string UserID { get; set; }
-		[ForeignKey("UserID")]
-		public virtual FarmApplicationDBUser AspNetUsers { get; set; }
+		//[ForeignKey("UserID")]
+		//public virtual FarmApplicationDBUser AspNetUsers { get; set; }
 
 	}
 }

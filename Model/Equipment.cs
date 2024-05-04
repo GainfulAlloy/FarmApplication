@@ -20,8 +20,8 @@ namespace FarmApplication.Model
 
 
 		public string UserID { get; set; }
-		[ForeignKey("UserID")]
-		public virtual FarmApplicationDBUser AspNetUsers { get; set; }
+		//[ForeignKey("UserID")]
+		//public virtual FarmApplicationDBUser AspNetUsers { get; set; }
 
 
 		// create a link between another table

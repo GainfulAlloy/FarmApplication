@@ -22,66 +22,6 @@ namespace FarmApplication.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("FarmApplication.Areas.Identity.Data.FarmApplicationDBUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FarmApplicationDBUser");
-                });
-
             modelBuilder.Entity("FarmApplication.Model.Equipment", b =>
                 {
                     b.Property<int>("Id")
@@ -99,11 +39,9 @@ namespace FarmApplication.Migrations
 
                     b.Property<string>("UserID")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Equipment");
                 });
@@ -125,11 +63,9 @@ namespace FarmApplication.Migrations
 
                     b.Property<string>("UserID")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ResourceId");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Resources");
                 });
@@ -181,7 +117,7 @@ namespace FarmApplication.Migrations
 
                     b.Property<string>("UserID")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("WorkersValuesWorkerID")
                         .HasColumnType("int");
@@ -193,8 +129,6 @@ namespace FarmApplication.Migrations
                     b.HasIndex("FieldValuesFieldID");
 
                     b.HasIndex("ResourcesValuesResourceId");
-
-                    b.HasIndex("UserID");
 
                     b.HasIndex("WorkersValuesWorkerID");
 
@@ -218,11 +152,9 @@ namespace FarmApplication.Migrations
 
                     b.Property<string>("UserID")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("FieldID");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Fields");
                 });
@@ -240,7 +172,7 @@ namespace FarmApplication.Migrations
 
                     b.Property<string>("UserID")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WorkerName")
                         .IsRequired()
@@ -251,31 +183,7 @@ namespace FarmApplication.Migrations
 
                     b.HasKey("WorkerID");
 
-                    b.HasIndex("UserID");
-
                     b.ToTable("Workers");
-                });
-
-            modelBuilder.Entity("FarmApplication.Model.Equipment", b =>
-                {
-                    b.HasOne("FarmApplication.Areas.Identity.Data.FarmApplicationDBUser", "AspNetUsers")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AspNetUsers");
-                });
-
-            modelBuilder.Entity("FarmApplication.Model.FarmResources", b =>
-                {
-                    b.HasOne("FarmApplication.Areas.Identity.Data.FarmApplicationDBUser", "AspNetUsers")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AspNetUsers");
                 });
 
             modelBuilder.Entity("FarmApplication.Model.FarmTasks", b =>
@@ -292,17 +200,9 @@ namespace FarmApplication.Migrations
                         .WithMany()
                         .HasForeignKey("ResourcesValuesResourceId");
 
-                    b.HasOne("FarmApplication.Areas.Identity.Data.FarmApplicationDBUser", "AspNetUsers")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FarmApplication.Model.Workers", "WorkersValues")
                         .WithMany()
                         .HasForeignKey("WorkersValuesWorkerID");
-
-                    b.Navigation("AspNetUsers");
 
                     b.Navigation("EquipmentValues");
 
@@ -311,28 +211,6 @@ namespace FarmApplication.Migrations
                     b.Navigation("ResourcesValues");
 
                     b.Navigation("WorkersValues");
-                });
-
-            modelBuilder.Entity("FarmApplication.Model.Field", b =>
-                {
-                    b.HasOne("FarmApplication.Areas.Identity.Data.FarmApplicationDBUser", "AspNetUsers")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AspNetUsers");
-                });
-
-            modelBuilder.Entity("FarmApplication.Model.Workers", b =>
-                {
-                    b.HasOne("FarmApplication.Areas.Identity.Data.FarmApplicationDBUser", "AspNetUsers")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AspNetUsers");
                 });
 #pragma warning restore 612, 618
         }

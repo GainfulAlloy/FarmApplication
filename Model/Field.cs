@@ -18,8 +18,8 @@ namespace FarmApplication.Model
         public int FieldSize { get; set; }
 
 		public string UserID { get; set; }
-		[ForeignKey("UserID")]
-		public virtual FarmApplicationDBUser AspNetUsers { get; set; }
+		//[ForeignKey("UserID")]
+		//public virtual FarmApplicationDBUser AspNetUsers { get; set; }
         // might need to keep an eye on this line above (if you get an error for trying to access data from an empty table it may be this)
 
 	}
