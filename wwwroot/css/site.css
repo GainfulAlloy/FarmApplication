@@ -19,4 +19,56 @@ html {
 
 body {
   margin-bottom: 60px;
+
+}
+
+
+#map{
+    height: 330px;
+    width: 330px;
+}
+
+#clock {
+    position: sticky;
+    text-align: right;
+    vertical-align: top;
+    font-size: 20px;
+    color: black;
+    font-weight: 600;
+    /*Text padding and margin for clock*/
+
+   
+}
+
+
+.navbar-brand{
+    
+    font-weight: 700;
+    font-size: 25px;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+thead {
+    background-color: #FFF;
+    border: 10px;
+    text-align: center;
+}
+
+
+.navbar {
+    background-image: linear-gradient(#50aa4f, #ecf6ec);
+    border-bottom: 10px;
+    border-color: black;
+    /* background-image: radial-gradient(#a1ad79, #ffd800)*/
+}
+
+
+
+
+.footer {
+    background-image: linear-gradient(#ecf6ec, #50aa4f);
+    padding: 10px;
+    /*padding-left: 460px;
+    padding-right: 1137px;*/
 }

@@ -1,0 +1,72 @@
+﻿@page
+@model FarmApplication.Pages.Maps.MappedIndexModel
+
+@using System.Security.Claims
+
+<head>
+    <title>Map for fields</title>
+    
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+</head>
+<body>
+	
+	<h1>Map of fields for user</h1>
+	<div id="map"></div>
+    <script type="text/javascript" src="~/js/site.js"></script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXhl_GzMw20renhg092Eksy1GqMT1r3VM&callback=initMap&v=weekly" 
+		async defer>
+	</script>
+			
+	
+</body>
+
+
+
+	
+	
+
+	<!-- this will show a set notification for when one of the three actions is performed on the database. Notification can be found at the end of the .cs files -->
+@* 	@if (TempData["success"] != null)
+	{
+
+		<p class="text-success">@TempData["success"]</p>
+
+	}
+
+	@{
+		var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Retrieve current user's ID
+	}
+
+	<table class="table table-bordered table-striped" style="width:100%">
+		<thead>
+			<tr>
+				<th>
+					Field name
+				</th>
+				<th>
+					Field size
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var obj in Model.Fields.Where(f => f.UserID == currentUserId))
+
+			{
+				<tr>
+					<td width="50%">@obj.FieldName</td>
+					<td width="30%">@obj.FieldSize</td>
+					<td>
+						<div class="w-75 btn-group" role="group">
+							<a asp-page="EditField" asp-route-id="@obj.FieldID" class="btn btn-primary mx-2">
+								Edit
+							</a>
+							<a asp-page="DeleteField" asp-route-id="@obj.FieldID" class="btn btn-danger mx-2">Delete</a>
+						</div>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table> *@
+
+</div>

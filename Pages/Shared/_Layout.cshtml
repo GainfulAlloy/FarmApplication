@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - FarmApplication</title>
+    <title>@ViewData["Title"] Group 5 - FarmApplication</title>
     <!-- you can download a theme from bootswatch to a file and set the location below to that file to change theme of the applciation -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -26,7 +26,7 @@
    <header>
         <nav class="navbar navbar-light bg-white border-bottom box-shadow mb-3 flex-column">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">FarmApplication</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">Farm Management Ltd</a>
                 <!-- note - the navbar toggle option does not obscure page content, it will add a scroll if needs be-->
                 <!-- this should diable user access to the nav bar if they arent logged in (prevent them from accessing pages) -->
                 @if (SignInManager.IsSignedIn(User))
@@ -53,14 +53,20 @@
                                  Fix - use href instead
                             -->
                             <li class="nav-item">
-                                <a class="nav-link text-dark" a href="~/Resources/ResourceIndex">
-                                    <span class="material-icons">equalizer</span> &ensp;Manage Resources
+                                <a class="nav-link text-dark" a href="~/Maps/MapsIndex">
+                                    <span class="material-icons">map</span> &ensp;Maps
                                 </a>
                             </li>
+                            
                             <!-- links to the Fields folder Index page. Allows for the creation of fields by adding a name and size.-->
                             <li class="nav-item">
                                 <a class="nav-link text-dark" a href="~/Fields/Index">
                                     <span class="material-icons">trending_up</span> &ensp; Fields
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" a href="~/Resources/ResourceIndex">
+                                    <span class="material-icons">equalizer</span> &ensp;Manage Resources
                                 </a>
                             </li>
                             <!-- note there isnt a calendar or settings page currently -->
