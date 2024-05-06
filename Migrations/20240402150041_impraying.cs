@@ -174,6 +174,36 @@ namespace FarmApplication.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "MapsField",
+                columns: Table => new
+                {
+                    FarmID = Table.Column<int>(type: "int", nullable: false).Annotation("SqlServer:Identity", "1, 1"),
+                    ManagerName = Table.Column<int>(type: "int", nullable: false),
+                    Latitude1 = Table.Column<float>(type: "float", nullable: false),
+                    Longitude1 = Table.Column<float>(type: "float", nullable: false),
+                    Latitude2 = Table.Column<float>(type: "float", nullable: false),
+                    Longitude2 = Table.Column<float>(type: "float", nullable: false),
+                    Latitude3 = Table.Column<float>(type: "float", nullable: false),
+                    Longitude3 = Table.Column<float>(type: "float", nullable: false),
+                    Latitude4 = Table.Column<float>(type: "float", nullable: false),
+                    Longitude4 = Table.Column<float>(type: "float", nullable: false),
+                    FieldID = Table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Maps", x => x.FarmID);
+                    table.ForeignKey(
+                        name: "FK_Fields_FieldID",
+                        column: x => x.FieldID,
+                        principalTable: "Fields",
+                        principalColumn: "FieldID",
+                        onDelete: ReferentialAction.Restrict);
+
+                }
+
+                );
+
             migrationBuilder.CreateIndex(
                 name: "IX_Equipment_UserID",
                 table: "Equipment",
@@ -218,6 +248,11 @@ namespace FarmApplication.Migrations
                 name: "IX_Workers_UserID",
                 table: "Workers",
                 column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MapsField_MapID",
+                table: "MapsField",
+                column: "FarmID");
         }
 
         /// <inheritdoc />
@@ -240,6 +275,9 @@ namespace FarmApplication.Migrations
 
             migrationBuilder.DropTable(
                 name: "FarmApplicationDBUser");
+
+            migrationBuilder.DropTable(
+                name: "MapsField");
         }
     }
 }
